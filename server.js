@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 if (process.env.NODE_ENV === 'production') {
   require('dotenv').config({
@@ -17,6 +18,15 @@ mongoose.connect(process.env.MONGO_URI, {
   useCreateIndex: true,
   useUnifiedTopology: true,
 });
+
+// middleware
+app.use(express.json());
+app.use(
+  cors({
+    origin: 'http://localhost:5000',
+    credentials: true,
+  })
+);
 
 // routes
 require('./routes/auth')(app); // a function that immediately invokes using app as parameter
