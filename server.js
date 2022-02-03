@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 
 if (process.env.NODE_ENV === 'production') {
   require('dotenv').config({
@@ -10,6 +11,12 @@ if (process.env.NODE_ENV === 'production') {
     path: `${__dirname}/.env.dev`,
   });
 }
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
 
 // routes
 require('./routes/auth')(app); // a function that immediately invokes using app as parameter
