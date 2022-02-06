@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  font-family: $mainFont;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: $codeFont;
+}
+
+h1 {
+  font-family: $headingFont;
+}

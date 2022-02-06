@@ -10,7 +10,7 @@ exports.register_get = (req, res) => {
 
 // Add new admin to db
 exports.register_post = (req, res) => {
-  if (req.body.registrationCode !== process.env.REGISTER_ADMIN_CODE) {
+  if (req.body.admin_code !== process.env.REGISTER_ADMIN_CODE) {
     res.send("Sorry, you're not allowed to make an account.");
   } else {
     Admin.findOne({ usename: req.body.username }, async (err, adminDoc) => {
@@ -18,7 +18,7 @@ exports.register_post = (req, res) => {
       if (adminDoc) {
         res.send('An administrator with that username already exists.');
       } else {
-        const hashedPassword = await bcrypt.hash(req.body.passord, 10);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
         const newAdmin = new Admin({
           username: req.body.username,
